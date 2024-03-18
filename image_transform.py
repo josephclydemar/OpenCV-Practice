@@ -13,7 +13,7 @@ def translate_frame(frame, x, y):
 
 
 def rotate_frame(frame, angle, rotation_point=None):
-    # print(frame.shape)
+    print(frame.shape)
     rows, cols, _ = frame.shape
     if rotation_point == None:
         rotation_point = (rows // 2, cols // 2)
@@ -39,7 +39,8 @@ capture = cv.VideoCapture(0)
 while True:
     isTrue, frame = capture.read()
     translated_frame = translate_frame(frame, -100, 100)
-    rotated_frame = rotate_frame(frame, 60)
+    gray_frame = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
+    rotated_frame = rotate_frame(gray_frame, 60)
     flipped_frame = flip_frame(frame, 1)
     cv.imshow('WebCAM Original', frame)
     cv.imshow('WebCAM Translated', translated_frame)
