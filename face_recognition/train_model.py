@@ -7,10 +7,12 @@ import cv2 as cv
 haar_cascade = cv.CascadeClassifier('./haarcascades/haarcascade_frontalface_default.xml')
 
 
-DIR = './CapturedFaces/train'
+TRAINING_DIR = os.path.join('CapturedFaces', 'train')
+VALIDATION_DIR = os.path.join('CapturedFaces', 'val')
+
 
 people = []
-for p in os.listdir(DIR):
+for p in os.listdir(TRAINING_DIR):
     people.append(p)
 # print(people)
 
@@ -20,7 +22,7 @@ def train_face_recognizer():
     labels = []
 
     for person in people:
-        path = os.path.join(DIR, person)
+        path = os.path.join(TRAINING_DIR, person)
         label = people.index(person)
 
         for img in os.listdir(path):
@@ -36,14 +38,15 @@ def train_face_recognizer():
     features = np.array(features, dtype='object')
     labels = np.array(labels)
 
-    face_recognizer = cv.face.LBPHFaceRecognizer_create()
+    # face_recognizer = cv.face.LBPHFaceRecognizer_create()
+    face_recognizer = cv.face.LBPHFaceRecognizer.create()
     face_recognizer.train(features, labels)
 
     np.save('./parameters/features.npy', features)
     np.save('./parameters/labels.npy', labels)
 
     face_recognizer.save('face_trained.yml')
-    print('Traing Finished--------------------------')
+    print('*****************************************  Training Finished  *****************************************')
 
 
 
