@@ -7,24 +7,21 @@ import numpy as np
 haar_cascade = cv.CascadeClassifier('./haarcascades/haarcascade_frontalface_default.xml')
 
 
-# DIR = './CapturedFaces/val'
-
 TRAINING_DIR = os.path.join('CapturedFaces', 'train')
 # VALIDATION_DIR = os.path.join('CapturedFaces', 'val')
 
 
 
-# people = ['ben_afflek', 'elton_john', 'jerry_seinfeld', 'madonna', 'mindy_kaling']
 people = []
 for p in os.listdir(TRAINING_DIR):
     people.append(p)
-print(people)
-
+print('Recognized People: ', people)
+print('Press D to Exit...')
 
 
 # face_recognizer = cv.face.LBPHFaceRecognizer_create()
 face_recognizer = cv.face.LBPHFaceRecognizer.create()
-face_recognizer.read('./face_trained.yml')
+face_recognizer.read('./model_trained.yml')
 
 # for p in people:
 #     for img in os.listdir(f'{TRAINING_DIR}/{p}'):

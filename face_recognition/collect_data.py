@@ -21,7 +21,7 @@ def capture_new_images(image_name: str, training_image_count=50, validation_imag
         print(e)
     
 
-    # start
+    
     count = 0
     while count < training_image_count:
         _, frame = capture.read()

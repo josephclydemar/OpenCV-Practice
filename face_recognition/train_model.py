@@ -1,7 +1,12 @@
 import os
-# import time
 import numpy as np
 import cv2 as cv
+
+if os.path.exists('model_trained.yml'):
+    os.remove('model_trained.yml')
+    print('---- Overwriting Old Trained Model ----')
+else:
+    print('------ Saving a New Trained Model ------')
 
 
 haar_cascade = cv.CascadeClassifier('./haarcascades/haarcascade_frontalface_default.xml')
@@ -45,7 +50,7 @@ def train_face_recognizer():
     np.save('./parameters/features.npy', features)
     np.save('./parameters/labels.npy', labels)
 
-    face_recognizer.save('face_trained.yml')
+    face_recognizer.save('model_trained.yml')
     print('*****************************************  Training Finished  *****************************************')
 
 
